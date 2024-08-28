@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
-import { useAppDispatch, useAppSelector } from './app/hooks';
-import { incremented, amountAdded } from './features/counter/counter-slice';
-import { useFetchBreedsQuery } from './features/dogs/dogs-api-slice';
-import logo from './logo.svg'
-import './App.css'
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
+import {
+  incremented,
+  amountAdded,
+  reset,
+} from "./features/counter/counter-slice";
+import { useFetchBreedsQuery } from "./features/dogs/dogs-api-slice";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   const count = useAppSelector((state) => state.counter.value);
@@ -20,27 +24,35 @@ function App() {
     dispatch(amountAdded(3));
   }
 
+  function resetClick() {
+    dispatch(reset());
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button onClick={handleClick}>
-            count is: {count}
-          </button>
+          <button onClick={handleClick}>count is: {count}</button>
         </p>
-        
+        <p>
+          <button onClick={resetClick}>Reset</button>
+        </p>
+
         <div>
           <p>Dogs to fetch:</p>
-          <select value={numDogs} onChange={(e) => setNumDogs(Number(e.target.value))}>
+          <select
+            value={numDogs}
+            onChange={(e) => setNumDogs(Number(e.target.value))}
+          >
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
             <option value="20">20</option>
           </select>
         </div>
-        
+
         <div>
           <p>Number of dogs fetched: {data.length}</p>
           <table>
@@ -72,7 +84,7 @@ function App() {
           >
             Learn React
           </a>
-          {' | '}
+          {" | "}
           <a
             className="App-link"
             href="https://vitejs.dev/guide/features.html"
@@ -84,7 +96,7 @@ function App() {
         </p>
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,9 +1,9 @@
 // DUCKS pattern
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CounterState {
+type CounterState = {
   value: number;
-}
+};
 
 const initialState: CounterState = {
   value: 0,
@@ -23,8 +23,11 @@ const counterSlice = createSlice({
     },
     // decrement
     // reset
+    reset(state) {
+      state.value = 0;
+    },
   },
 });
 
-export const { incremented, amountAdded } = counterSlice.actions;
+export const { incremented, amountAdded, reset } = counterSlice.actions;
 export default counterSlice.reducer;
